@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Pressable, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Pressable,
+  Text,
+  Modal,
+} from "react-native";
 
-export default function GoalInput({ addGoalHandler }) {
+export default function GoalInput({ addGoalHandler, isVisible }) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
@@ -11,32 +18,45 @@ export default function GoalInput({ addGoalHandler }) {
     setEnteredGoalText("");
   }
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter tasks"
-        placeholderTextColor={"black"}
-        onChangeText={goalInputHandler}
-        value={enteredGoalText}
-      />
-      <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
-        <Text style={styles.btnText}>Add task</Text>
-      </Pressable>
-    </View>
+    <Modal visible={isVisible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <View style={styles.addMarginTop}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter tasks"
+            placeholderTextColor={"black"}
+            onChangeText={goalInputHandler}
+            value={enteredGoalText}
+          />
+          <View style={styles.btnContainer}>
+            <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
+              <Text style={styles.btnText}>Add task</Text>
+            </Pressable>
+            <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
+              <Text style={styles.btnText}>Cancel</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
+    flex: 1,
+    justifyContent: "flex-start",
     alignSelf: "center",
-    justifyContent: "center",
     width: "100%",
-    marginTop: 80,
     paddingBottom: 30,
+    backgroundColor: "#e64980",
+  },
+  addMarginTop: {
+    marginTop: 100,
   },
   input: {
-    width: "62%",
+    alignSelf: "center",
+    width: 350,
     padding: 10,
     borderWidth: 0.5,
     borderColor: "black",
@@ -49,9 +69,14 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "#212529",
-    marginLeft: 10,
+    marginTop: 15,
   },
   btnText: {
     color: "#f8f9fa",
+  },
+  btnContainer: {
+    alignSelf: "center",
+    marginTop: 30,
+    width: 350,
   },
 });
