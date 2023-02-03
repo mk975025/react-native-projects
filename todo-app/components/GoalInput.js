@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Pressable, Text } from "react-native";
 
-export default function GoalInput({ goalInputHandler, addGoalHandler }) {
+export default function GoalInput({ addGoalHandler }) {
+  const [enteredGoalText, setEnteredGoalText] = useState("");
+  function goalInputHandler(enteredText) {
+    setEnteredGoalText(enteredText);
+  }
+  function addGoal() {
+    addGoalHandler(enteredGoalText);
+    setEnteredGoalText("");
+  }
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -9,11 +17,12 @@ export default function GoalInput({ goalInputHandler, addGoalHandler }) {
         placeholder="Enter tasks"
         placeholderTextColor={"black"}
         onChangeText={goalInputHandler}
+        value={enteredGoalText}
       />
       <Pressable style={styles.btn} title="Add task">
-        <Text style={styles.btnText} onPress={addGoalHandler}>
+        <Text style={styles.btnText} onPress={addGoal}>
           Add task
-        </Text> 
+        </Text>
       </Pressable>
     </View>
   );
