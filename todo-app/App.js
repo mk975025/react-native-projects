@@ -7,6 +7,7 @@ import {
   Pressable,
   ScrollView,
   TouchableWithoutFeedback,
+  FlatList,
 } from "react-native";
 import { useState } from "react";
 
@@ -20,7 +21,7 @@ export default function App() {
   function addGoalHandler() {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      enteredGoalText,
+      { text: enteredGoalText, key: Math.random().toString() },
     ]);
   }
 
@@ -48,13 +49,23 @@ export default function App() {
         }}
       ></View>
       <View style={styles.goalsContainer}>
-        <ScrollView style={styles.goals}>
-          {courseGoals.map((goal, index) => (
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goal}>
+                <Text style={{ color: "#f8f9fa" }}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+          style={styles.goals}
+        >
+          {/* {courseGoals.map((goal, index) => (
             <View key={index} style={styles.goal}>
               <Text style={{ color: "#f8f9fa" }}>{goal}</Text>
             </View>
-          ))}
-        </ScrollView>
+          ))} */}
+        </FlatList>
       </View>
     </View>
   );
