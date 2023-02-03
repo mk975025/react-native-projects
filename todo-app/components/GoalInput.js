@@ -19,10 +19,8 @@ export default function GoalInput({ addGoalHandler }) {
         onChangeText={goalInputHandler}
         value={enteredGoalText}
       />
-      <Pressable style={styles.btn} title="Add task">
-        <Text style={styles.btnText} onPress={addGoal}>
-          Add task
-        </Text>
+      <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
+        <Text style={styles.btnText}>Add task</Text>
       </Pressable>
     </View>
   );
