@@ -12,6 +12,7 @@ export default function App() {
       ...currentCourseGoals,
       { text: enteredGoalText, key: Math.random().toString() },
     ]);
+    onToggleModal();
   }
 
   function deleteGoalHandler(id) {
@@ -36,7 +37,11 @@ export default function App() {
           <Text style={styles.btnText}>Add task</Text>
         </Pressable>
       </View>
-      <GoalInput addGoalHandler={addGoalHandler} isVisible={toggleModal} />
+      <GoalInput
+        addGoalHandler={addGoalHandler}
+        isVisible={toggleModal}
+        onCancel={onToggleModal}
+      />
       <View
         style={{
           borderBottomWidth: 1,
@@ -49,9 +54,6 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            {
-              console.log(itemData.item);
-            }
             return (
               <GoalItem
                 text={itemData.item.text}

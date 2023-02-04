@@ -8,7 +8,7 @@ import {
   Modal,
 } from "react-native";
 
-export default function GoalInput({ addGoalHandler, isVisible }) {
+export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
@@ -32,7 +32,7 @@ export default function GoalInput({ addGoalHandler, isVisible }) {
             <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
               <Text style={styles.btnText}>Add task</Text>
             </Pressable>
-            <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
+            <Pressable style={styles.btn} title="Cancel " onPress={onCancel}>
               <Text style={styles.btnText}>Cancel</Text>
             </Pressable>
           </View>
