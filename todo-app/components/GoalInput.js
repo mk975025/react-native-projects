@@ -9,17 +9,24 @@ import {
   Image,
 } from "react-native";
 
-export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
-  const [enteredGoalTitle, setEnteredGoalTitle] = useState("");
-  const [enteredGoalText, setEnteredGoalText] = useState("");
+export default function GoalInput({
+  addGoal,
+  isVisible,
+  onCancel,
+  enteredGoalText,
+  setEnteredGoalText,
+  enteredGoalTitle,
+  setEnteredGoalTitle,
+}) {
+  // const [enteredGoalTitle, setEnteredGoalTitle] = useState("");
+  // const [enteredGoalText, setEnteredGoalText] = useState("");
 
-  function addGoal() {
-    console.log("you fucked up");
-    addGoalHandler(enteredGoalTitle, enteredGoalText);
-    setEnteredGoalText("");
-    setEnteredGoalTitle("");
-  }
-  
+  // function addGoal() {
+  //   addGoalHandler(enteredGoalTitle, enteredGoalText);
+  //   setEnteredGoalText("");
+  //   setEnteredGoalTitle("");
+  // }
+
   return (
     <Modal visible={isVisible} animationType="slide">
       <View style={styles.inputContainer}>

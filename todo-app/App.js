@@ -1,15 +1,23 @@
 import { StyleSheet, View, FlatList, Pressable, Text } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
+  const [enteredGoalTitle, setEnteredGoalTitle] = useState("");
+  const [enteredGoalText, setEnteredGoalText] = useState("");
+
+  function addGoal() {
+    addGoalHandler(enteredGoalTitle, enteredGoalText);
+    setEnteredGoalText("");
+    setEnteredGoalTitle("");
+  }
 
   function addGoalHandler(enteredGoalTitle, enteredGoalText) {
-    if (enteredGoalText === "") return;
-    console.log("h123ere");
+
+    if (enteredGoalTitle === "") return;
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       {
@@ -47,6 +55,11 @@ export default function App() {
         addGoalHandler={addGoalHandler}
         isVisible={toggleModal}
         onCancel={onToggleModal}
+        enteredGoalText={enteredGoalText}
+        setEnteredGoalText={setEnteredGoalText}
+        enteredGoalTitle={enteredGoalTitle}
+        setEnteredGoalTitle={setEnteredGoalTitle}
+        addGoal={addGoal}
       />
       <View
         style={{
