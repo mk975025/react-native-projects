@@ -2,6 +2,18 @@ import React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
 export default function GoalItem({ text, deleteGoalHandler, id }) {
+  const currentTime = () => {
+    const date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = 12 % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${hours}:${minutes} ${ampm}`;
+  };
+
+  console.log(currentTime);
   return (
     <View style={styles.goal}>
       <Pressable
@@ -9,6 +21,9 @@ export default function GoalItem({ text, deleteGoalHandler, id }) {
         onPress={deleteGoalHandler.bind(undefined, id)}
         style={({ pressed }) => pressed && styles.pressedItem}
       >
+        <View>
+          <Text style={styles.goalText}>{currentTime()}</Text>
+        </View>
         <Text style={styles.goalText}>{text}</Text>
       </Pressable>
     </View>

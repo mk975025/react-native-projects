@@ -6,6 +6,7 @@ import {
   Pressable,
   Text,
   Modal,
+  Image,
 } from "react-native";
 
 export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
@@ -21,10 +22,13 @@ export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
     <Modal visible={isVisible} animationType="slide">
       <View style={styles.inputContainer}>
         <View style={styles.addMarginTop}>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <Image style={styles.image} />
+          </View>
           <TextInput
             style={styles.input}
             placeholder="Enter tasks"
-            placeholderTextColor={"black"}
+            placeholderTextColor={"white"}
             onChangeText={goalInputHandler}
             value={enteredGoalText}
           />
@@ -32,7 +36,11 @@ export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
             <Pressable style={styles.btn} title="Add task " onPress={addGoal}>
               <Text style={styles.btnText}>Add task</Text>
             </Pressable>
-            <Pressable style={styles.btn} title="Cancel " onPress={onCancel}>
+            <Pressable
+              style={styles.btnCancel}
+              title="Cancel "
+              onPress={onCancel}
+            >
               <Text style={styles.btnText}>Cancel</Text>
             </Pressable>
           </View>
@@ -49,7 +57,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: "100%",
     paddingBottom: 30,
-    backgroundColor: "#e64980",
+    backgroundColor: "#212529",
   },
   addMarginTop: {
     marginTop: 100,
@@ -59,7 +67,8 @@ const styles = StyleSheet.create({
     width: 350,
     padding: 10,
     borderWidth: 0.5,
-    borderColor: "black",
+    borderColor: "white",
+    color: "white",
   },
   btn: {
     alignItems: "center",
@@ -68,15 +77,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: "#212529",
+    backgroundColor: "#f8f9fa",
+    marginTop: 15,
+  },
+  btnCancel: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "#e03131",
     marginTop: 15,
   },
   btnText: {
-    color: "#f8f9fa",
+    color: "#212529",
   },
   btnContainer: {
     alignSelf: "center",
     marginTop: 30,
     width: 350,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
 });

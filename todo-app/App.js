@@ -8,6 +8,8 @@ export default function App() {
   const [toggleModal, setToggleModal] = useState(false);
 
   function addGoalHandler(enteredGoalText) {
+    if (enteredGoalText === "") return;
+
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       { text: enteredGoalText, key: Math.random().toString() },
