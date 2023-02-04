@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Modal,
@@ -12,21 +12,25 @@ export default function GoalDescription(props) {
   return (
     <Modal visible={props.visible} animationType="slide" transparent={true}>
       <View style={styles.editTaskContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Edit task name"
-        ></TextInput>
-        <TextInput
-          style={styles.input}
-          placeholder="Edit task description"
-        ></TextInput>
-        <View style={styles.btnContainer}>
-          <Pressable style={styles.btn}>
-            <Text>Update task</Text>
-          </Pressable>
-          <Pressable style={styles.btnCancel} onPress={props.onCancel}>
-            <Text>Cancel</Text>
-          </Pressable>
+        <View style={{ marginTop: 75 }}>
+          <TextInput
+            style={styles.input}
+            placeholder="Edit task name"
+            value={data.enteredGoalTitle}
+          ></TextInput>
+          <TextInput
+            style={styles.input}
+            placeholder="Edit task description"
+            value={data.enteredGoalText}
+          ></TextInput>
+          <View style={styles.btnContainer}>
+            <Pressable style={styles.btn}>
+              <Text>Update task</Text>
+            </Pressable>
+            <Pressable style={styles.btnCancel} onPress={props.onCancel}>
+              <Text>Cancel</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </Modal>
@@ -46,10 +50,10 @@ const styles = StyleSheet.create({
   editTaskContainer: {
     backgroundColor: "#212529",
     marginTop: "auto",
-    height: "50%",
+    height: "60%",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   btn: {
     alignItems: "center",

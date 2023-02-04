@@ -1,7 +1,8 @@
 import { StyleSheet, View, FlatList, Pressable, Text } from "react-native";
-import { useState, useContext } from "react";
+import React, { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
+export const editTasksContext = React.createContext();
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
@@ -16,7 +17,6 @@ export default function App() {
   }
 
   function addGoalHandler(enteredGoalTitle, enteredGoalText) {
-
     if (enteredGoalTitle === "") return;
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
@@ -40,52 +40,54 @@ export default function App() {
   }
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.addTaskContainer}>
-        <Pressable
-          title="Add new task"
-          color="#212529"
-          onPress={onToggleModal}
-          style={styles.btn}
-        >
-          <Text style={styles.btnText}>Add task</Text>
-        </Pressable>
-      </View>
-      <GoalInput
-        addGoalHandler={addGoalHandler}
-        isVisible={toggleModal}
-        onCancel={onToggleModal}
-        enteredGoalText={enteredGoalText}
-        setEnteredGoalText={setEnteredGoalText}
-        enteredGoalTitle={enteredGoalTitle}
-        setEnteredGoalTitle={setEnteredGoalTitle}
-        addGoal={addGoal}
-      />
-      <View
-        style={{
-          borderBottomWidth: 1,
-          borderBottomColor: "white",
-          width: "90%",
-          alignSelf: "center",
-        }}
-      ></View>
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                title={itemData.item.title}
-                text={itemData.item.text}
-                deleteGoalHandler={deleteGoalHandler}
-                id={itemData.item.key}
-              />
-            );
+    <editTasksContext.Provider value={data}>
+      <View style={styles.mainContainer}>
+        <View style={styles.addTaskContainer}>
+          <Pressable
+            title="Add new task"
+            color="#212529"
+            onPress={onToggleModal}
+            style={styles.btn}
+          >
+            <Text style={styles.btnText}>Add task</Text>
+          </Pressable>
+        </View>
+        <GoalInput
+          addGoalHandler={addGoalHandler}
+          isVisible={toggleModal}
+          onCancel={onToggleModal}
+          enteredGoalText={enteredGoalText}
+          setEnteredGoalText={setEnteredGoalText}
+          enteredGoalTitle={enteredGoalTitle}
+          setEnteredGoalTitle={setEnteredGoalTitle}
+          addGoal={addGoal}
+        />
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "white",
+            width: "90%",
+            alignSelf: "center",
           }}
-          style={styles.goals}
-        ></FlatList>
+        ></View>
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  title={itemData.item.title}
+                  text={itemData.item.text}
+                  deleteGoalHandler={deleteGoalHandler}
+                  id={itemData.item.key}
+                />
+              );
+            }}
+            style={styles.goals}
+          ></FlatList>
+        </View>
       </View>
-    </View>
+    </editTasksContext.Provider>
   );
 }
 

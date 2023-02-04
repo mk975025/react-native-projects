@@ -18,15 +18,6 @@ export default function GoalInput({
   enteredGoalTitle,
   setEnteredGoalTitle,
 }) {
-  // const [enteredGoalTitle, setEnteredGoalTitle] = useState("");
-  // const [enteredGoalText, setEnteredGoalText] = useState("");
-
-  // function addGoal() {
-  //   addGoalHandler(enteredGoalTitle, enteredGoalText);
-  //   setEnteredGoalText("");
-  //   setEnteredGoalTitle("");
-  // }
-
   return (
     <Modal visible={isVisible} animationType="slide">
       <View style={styles.inputContainer}>
