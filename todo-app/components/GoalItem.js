@@ -30,8 +30,10 @@ export default function GoalItem({ title, text, deleteGoalHandler, id }) {
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
           <Text style={styles.goalText}>{currentTime()}</Text>
         </View>
-        <Text style={styles.goalText}>{text}</Text>
-        <Text style={styles.goalText}>{title}</Text>
+        <Text style={styles.goalTitle}>{title}</Text>
+        <Text numberOfLines={1} style={styles.goalText}>
+          {text}
+        </Text>
       </Pressable>
       <GoalDescription
         visible={toggleModal}
@@ -49,9 +51,11 @@ const styles = StyleSheet.create({
     color: "#f8f9fa",
     backgroundColor: "#212529",
     alignSelf: "center",
+    height: 125,
   },
   pressedItem: {
     opacity: 0.5,
   },
+  goalTitle: { padding: 8, color: "#f8f9fa", fontSize: 20 },
   goalText: { padding: 8, color: "#f8f9fa" },
 });
