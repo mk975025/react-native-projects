@@ -23,7 +23,10 @@ export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
       <View style={styles.inputContainer}>
         <View style={styles.addMarginTop}>
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <Image style={styles.image} />
+            <Image
+              style={styles.image}
+              source={require("../assets/goal.png")}
+            />
           </View>
           <TextInput
             style={styles.input}

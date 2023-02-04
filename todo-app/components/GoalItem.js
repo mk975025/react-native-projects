@@ -1,31 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
+import GoalDescription from "./GoalDescription";
+
+function currentTime() {
+  const date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = 12 % 12;
+  hours = hours ? hours : 12; // 12 mod 12 is 0, if hours is falsy (is 0), then default to 12
+  minutes = minutes < 10 ? `0${minutes}` : minutes;
+  return `${hours}:${minutes} ${ampm}`;
+}
 
 export default function GoalItem({ text, deleteGoalHandler, id }) {
-  const currentTime = () => {
-    const date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = 12 % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${hours}:${minutes} ${ampm}`;
-  };
-
-  console.log(currentTime);
+  const [toggleModal, setToggleModal] = useState(false);
+  function handleModal() {
+    setToggleModal((prevState) => !prevState);
+  }
+  // deleteGoalHandler.bind(undefined, id);
   return (
     <View style={styles.goal}>
       <Pressable
         android_ripple={{ color: "#dddddd" }}
         onPress={deleteGoalHandler.bind(undefined, id)}
+        onLongPress={handleModal}
         style={({ pressed }) => pressed && styles.pressedItem}
       >
-        <View>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
           <Text style={styles.goalText}>{currentTime()}</Text>
         </View>
         <Text style={styles.goalText}>{text}</Text>
       </Pressable>
+      <GoalDescription
+        visible={toggleModal}
+        onCancel={handleModal}
+      ></GoalDescription>
     </View>
   );
 }
