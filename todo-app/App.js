@@ -7,12 +7,16 @@ export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
 
-  function addGoalHandler(enteredGoalText) {
+  function addGoalHandler(enteredGoalTitle, enteredGoalText) {
     if (enteredGoalText === "") return;
-
+    console.log("h123ere");
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      { text: enteredGoalText, key: Math.random().toString() },
+      {
+        title: enteredGoalTitle,
+        text: enteredGoalText,
+        key: Math.random().toString(),
+      },
     ]);
     onToggleModal();
   }
@@ -58,6 +62,7 @@ export default function App() {
           renderItem={(itemData) => {
             return (
               <GoalItem
+                title={itemData.item.title}
                 text={itemData.item.text}
                 deleteGoalHandler={deleteGoalHandler}
                 id={itemData.item.key}

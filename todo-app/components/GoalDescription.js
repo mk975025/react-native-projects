@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
+
 export default function GoalDescription(props) {
   return (
     <Modal visible={props.visible} animationType="slide" transparent={true}>

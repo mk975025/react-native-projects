@@ -13,7 +13,7 @@ function currentTime() {
   return `${hours}:${minutes} ${ampm}`;
 }
 
-export default function GoalItem({ text, deleteGoalHandler, id }) {
+export default function GoalItem({ title, text, deleteGoalHandler, id }) {
   const [toggleModal, setToggleModal] = useState(false);
   function handleModal() {
     setToggleModal((prevState) => !prevState);
@@ -31,6 +31,7 @@ export default function GoalItem({ text, deleteGoalHandler, id }) {
           <Text style={styles.goalText}>{currentTime()}</Text>
         </View>
         <Text style={styles.goalText}>{text}</Text>
+        <Text style={styles.goalText}>{title}</Text>
       </Pressable>
       <GoalDescription
         visible={toggleModal}

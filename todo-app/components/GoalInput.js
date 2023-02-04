@@ -10,14 +10,16 @@ import {
 } from "react-native";
 
 export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
+  const [enteredGoalTitle, setEnteredGoalTitle] = useState("");
   const [enteredGoalText, setEnteredGoalText] = useState("");
-  function goalInputHandler(enteredText) {
-    setEnteredGoalText(enteredText);
-  }
+
   function addGoal() {
-    addGoalHandler(enteredGoalText);
+    console.log("you fucked up");
+    addGoalHandler(enteredGoalTitle, enteredGoalText);
     setEnteredGoalText("");
+    setEnteredGoalTitle("");
   }
+  
   return (
     <Modal visible={isVisible} animationType="slide">
       <View style={styles.inputContainer}>
@@ -30,9 +32,16 @@ export default function GoalInput({ addGoalHandler, isVisible, onCancel }) {
           </View>
           <TextInput
             style={styles.input}
-            placeholder="Enter tasks"
+            placeholder="Enter task title"
             placeholderTextColor={"white"}
-            onChangeText={goalInputHandler}
+            onChangeText={setEnteredGoalTitle}
+            value={enteredGoalTitle}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter task description"
+            placeholderTextColor={"white"}
+            onChangeText={setEnteredGoalText}
             value={enteredGoalText}
           />
           <View style={styles.btnContainer}>
@@ -72,6 +81,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: "white",
     color: "white",
+    marginBottom: 15,
   },
   btn: {
     alignItems: "center",
